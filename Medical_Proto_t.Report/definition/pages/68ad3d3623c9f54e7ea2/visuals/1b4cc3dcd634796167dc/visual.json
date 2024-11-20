@@ -23,7 +23,8 @@
                     "textStyle": {
                       "fontWeight": "bold",
                       "fontSize": "20pt",
-                      "textDecoration": "underline"
+                      "textDecoration": "underline",
+                      "color": "#418b41"
                     }
                   }
                 ]
