@@ -1,0 +1,183 @@
+table Sheet1
+	lineageTag: 548059ba-39cc-446b-bc78-a6bb9121983c
+
+	measure Measure = "this is a test measure, please "
+		lineageTag: abcc72a9-2bd0-4b88-9c1b-eff666bd7022
+
+	measure 'measure 2' = "this is also sample 7"
+		lineageTag: 10305b12-1e69-4227-85ac-25df9c4f72d3
+
+	column City
+		dataType: string
+		lineageTag: 4df5cac6-4e80-4e81-b6ee-5e859acec1b3
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: f7142512-e6a4-47c7-a7bc-a48345313aff
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		dataType: string
+		lineageTag: f25116b7-c4e0-481e-a5fa-0722a4015048
+		summarizeBy: none
+		sourceColumn: Region
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Products Name'
+		dataType: string
+		lineageTag: 01e962e5-8f8d-471d-b687-9983a491030d
+		summarizeBy: none
+		sourceColumn: Products Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Name'
+		dataType: string
+		lineageTag: 6145d073-95bd-489d-9e26-e98f29020cd4
+		summarizeBy: none
+		sourceColumn: Event Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Event Category'
+		dataType: string
+		lineageTag: 80262443-141a-42d6-b077-0d9a977265a0
+		summarizeBy: none
+		sourceColumn: Event Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 37917b7c-a23d-48a8-89e7-b00c5e4bcf6b
+		summarizeBy: count
+		sourceColumn: Page ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Page Title'
+		dataType: string
+		lineageTag: 52839b21-5856-4c61-af9c-00b0a376cd1f
+		summarizeBy: none
+		sourceColumn: Page Title
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Referral URL'
+		dataType: string
+		lineageTag: 5c93632e-01fe-4de3-aee5-f68e96913157
+		summarizeBy: none
+		sourceColumn: Referral URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Server Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e78d2218-8701-4590-8c71-1ec42d61eebe
+		summarizeBy: none
+		sourceColumn: Server Date
+
+		variation Variation
+			isDefault
+			relationship: 81d05d67-57c7-4491-ab8d-adada34f699e
+			defaultHierarchy: LocalDateTable_cf0cdd64-650c-43da-8888-39c8c5d876b3.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column URL
+		dataType: string
+		lineageTag: cec14ba4-051f-4de0-b783-657049ead2cc
+		summarizeBy: none
+		sourceColumn: URL
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visit ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: b6cf079f-124d-4bb8-8a98-caea74eae4f7
+		summarizeBy: count
+		sourceColumn: Visit ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visitor ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: cf832f87-69fa-4611-a53f-1ce0e25b05cb
+		summarizeBy: count
+		sourceColumn: Visitor ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Visit Type'
+		dataType: string
+		lineageTag: 7e664c24-c7d8-4e37-9af1-78f82992d528
+		summarizeBy: none
+		sourceColumn: Visit Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Since Last Visit'
+		dataType: int64
+		formatString: 0
+		lineageTag: f1ffc5d0-8702-4a4f-b949-a7ecfb7e3cb9
+		summarizeBy: average
+		sourceColumn: Days Since Last Visit
+
+		annotation SummarizationSetBy = User
+
+	column 'Visit Duration (Seconds)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 281de108-c357-4108-a1b0-7752ac383ffd
+		summarizeBy: sum
+		sourceColumn: Visit Duration (Seconds)
+
+		annotation SummarizationSetBy = Automatic
+
+	column Session_id
+		dataType: int64
+		formatString: 0
+		lineageTag: ca9a561e-d24b-4e6b-b6b2-512ce3fb4fe0
+		summarizeBy: sum
+		sourceColumn: Session_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column Action_Key
+		dataType: string
+		lineageTag: d9bac594-d063-4210-bc89-b5846c106b78
+		summarizeBy: none
+		sourceColumn: Action_Key
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sheet1 = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\DhruminLuhar\Downloads\MedicalData_POC.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"City", type text}, {"Country", type text}, {"Region", type text}, {"Products Name", type text}, {"Event Name", type text}, {"Event Category", type text}, {"Page ID", Int64.Type}, {"Page Title", type text}, {"Referral URL", type text}, {"Server Date", type date}, {"URL", type text}, {"Visit ID", Int64.Type}, {"Visitor ID", Int64.Type}, {"Visit Type", type text}, {"Days Since Last Visit", Int64.Type}, {"Visit Duration (Seconds)", Int64.Type}, {"Session_id", Int64.Type}, {"Action_Key", type text}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each [Days Since Last Visit] <> null and [Days Since Last Visit] <> "")
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Medical_Proto_t"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "796a6684-aca2-4056-b7f1-c4a4b0428f3c"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Medical_Proto_t"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2f40ea6c-859e-4cec-b970-d6d6bc251ac9"
+  }
+}
